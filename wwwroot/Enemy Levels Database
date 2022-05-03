@@ -1,0 +1,324 @@
+YEP_EnemyLevels
+
+============================================================================
+Introduction
+============================================================================
+
+This plugin allows enemies to function off of a leveling system. An enemy's
+level will be increased relative to the player under specific rulings and
+will increase its stats based on its level.
+
+============================================================================
+Default Level Types
+============================================================================
+
+When an enemy is made in battle, it will create its initial level off of a
+set of rules. These are the various rules you can change the 'Default Type'
+plugin parameter to reflect.
+
+Type:
+
+- Type 0 - Lowest level of all actors that have joined the player party.
+- Type 1 - Lowest level of all actors that are in the battling party.
+- Type 2 - Average level of all actors that have joined the player party.
+- Type 3 - Average level of all actors that are in the battling party.
+- Type 4 - Highest level of all actors that have joined the player party.
+- Type 5 - Highest level of all actors that are in the battling party.
+
+After the level type has been determined for the enemy, random level
+fluctuations are then added.
+
+============================================================================
+Notetags
+============================================================================
+
+You can use these notetags to adjust how enemy levels are handled
+individually per enemy.
+
+Enemy Notetags:
+
+  <Show Level>
+  <Hide Level>
+  This will cause the enemy to show or hide its level upon target selection.
+
+  <Minimum Level: x>
+  <Maximum Level: x>
+  This sets the enemy's minimum and maximum levels respectively to x. This
+  will cause the enemy, upon the start of battle, to adjust levels within
+  this particular range. Any skills that alter enemy levels are able to
+  bypass these limits unless if it were to bypass the maximum cap.
+
+  <Static Level: x>
+  This sets the enemy's starting level to exactly x. This will cause the
+  enemy, upon the start of battle, to adjust levels within this particular
+  range. Any skills that alter enemy levels are able to bypass these limits
+  unless if it were to bypass the maximum cap.
+
+  <Starting Level Type: x>
+  This sets the enemy's starting level type to x from 0 to 5. Refer to the
+  'Default Level Types' party of the Help File.
+
+  <Positive Level Fluctuation: x>
+  <Negative Level Fluctuation: x>
+  This sets the positive/negative level fluctuation for the enemy. Any level
+  fluctuation is calculated at the start of battle, but after the starting
+  level type has been determined.
+
+  <Level Fluctuation: x>
+  This sets both the positive and negative level fluctuation for the enemy
+  to x. Any level fluctuation is calculated at the start of battle, but
+  after the starting level type has been determined.
+
+  <stat Rate: +x% per level>
+  <stat Rate: -x% per level>
+  <stat Rate: +x.y per level>
+  <stat Rate: -x.y per level>
+  Replace 'stat' with 'maxhp', 'maxmp', 'atk', 'def', 'mat', 'mdf', 'agi',
+  'luk', 'exp', or 'gold'. This will set this enemy to have an increase or
+  decrease of x% rate per level. If you use the x.y formula, it will have a
+  rate increase of +x.y or -x.y per level.
+
+  <stat Flat: +x per level>
+  <stat Flat: -x per level>
+  <stat Flat: +x.y per level>
+  <stat Flat: -x.y per level>
+  Replace 'stat' with 'maxhp', 'maxmp', 'atk', 'def', 'mat', 'mdf', 'agi',
+  'luk', 'exp', or 'gold'. This will set this enemy to have an increase or
+  decrease of flat x value per level. If you use the x.y formula, it will
+  have a flat increase of +x.y or -x.y per level.
+
+  <Resist Level Change>
+  This will cause the enemy to be immune to any form of level changing
+  through skills and items. However, the enemy is not immune to any level
+  changing through script calls.
+
+  <Skill x Require Level: y>
+  <Skill name Require Level: y>
+  If this enemy is to use skill x (or named skill), it must be at least
+  level y to be able to use it. If the enemy is under level y, the skill
+  will be sealed and cannot be used.
+
+Skill and Item Notetags:
+
+  <Reset Enemy Level>
+  This will reset the target enemy's level back to what it was at the start
+  of battle.
+
+  <Change Enemy Level: +x>
+  <Change Enemy Level: -x>
+  If this action is used against an enemy, it will change the enemy's level
+  by +x or -x. If an action contains both a reset and level change, the
+  reset will occur first before the level change.
+
+============================================================================
+Lunatic Mode - Custom Starting Level
+============================================================================
+
+For those with JavaScript experience, you can have enemies have conditional
+starting levels. Place these Lunatic Mode notetags into the enemy notebox:
+
+Enemy Notetags:
+
+  <Custom Starting Level>
+   level = $gameActors.actor(1).level + 5;
+  </Custom Starting Level>
+  The 'level' variable will become the enemy's starting level. This level is
+  still affected by the enemy's minimum and maximum starting level barriers.
+  After the starting levels are decided, it will still be affected by the
+  random level fluctuation.
+
+============================================================================
+Lunatic Mode - Custom Parameter Formulas
+============================================================================
+
+For those with JavaScript experience, you can have different formulas for
+the ways parameters are calculated in regards to the enemy's level. Use the
+notetags below:
+
+Enemy Notetags:
+
+  <Custom Parameter stat Formula>
+   base * (1 + (level - 1) * rate) + (flat * (level - 1))
+  </Custom Parameter stat Formula>
+  Replace 'stat' with 'maxhp', 'maxmp', 'atk', 'def', 'mat', 'mdf', 'agi',
+  'luk', 'exp', or 'gold'. Whatever is calculated for the formula on the
+  last line will become the parameter value for the stat.
+
+============================================================================
+Lunatic Mode - Custom Change Enemy Level
+============================================================================
+
+For those with JavaScript experience and would like to have more dynamic
+ways of altering enemy levels instead of flat values, you can use these
+notetags to do so:
+
+Skill and Item Notetags:
+
+  <Custom Change Enemy Level>
+   level += user.atk;
+   level -= target.agi;
+  </Custom Change Enemy Level>
+  The 'level' variable will be the enemy's current level. Any changes made
+  to the 'level' variable will be what the enemy's level will become after
+  this effect finishes taking place. If the skill has a reset level effect,
+  it is applied first. If the skill has a flat level changing effect, that
+  effect is applied next. After those two effects are applied, this custom
+  enemy level change will take place.
+
+============================================================================
+Lunatic Mode - New JavaScript Functions
+============================================================================
+
+Here are some new JavaScript functions that have been added by this plugin.
+
+enemy.level
+- This will return the enemy's current level.
+
+enemy.originalLevel()
+- This will return the enemy's original level from the start of battle.
+
+enemy.changeLevel(x)
+- This will change the enemy's level to x.
+
+enemy.gainLevel(x)
+- This will cause the enemy to gain x levels.
+
+enemy.loseLevel(x)
+- This will cause the enemy to lose x levels.
+
+enemy.resetLevel()
+- Changes the enemy's level back to what it was at the start of battle.
+
+$gameParty.lowestLevelAllMembers()
+- This will return the lowest level of all party members.
+
+$gameParty.lowestLevelBattleMembers()
+- This will return the lowest level of all battle members.
+
+$gameParty.averageLevelAllMembers()
+- This will return the average level of all party members.
+
+$gameParty.averageLevelBattleMembers()
+- This will return the average level of all battle members.
+
+$gameParty.highestLevelAllMembers()
+- This will return the highest level of all party members.
+
+$gameParty.highestLevelBattleMembers()
+- This will return the highest level of all battle members.
+
+$gameTroop.changeLevel(x)
+- Changes the levels of all enemies to x.
+
+$gameTroop.gainLevel(x)
+- Raises the levels of all enemies by x.
+
+$gameTroop.loseLevel(x)
+- Lowers the levels of all enemies by x.
+
+$gameTroop.resetLevel()
+- Resets the levels of all enemies to their original levels at battle start.
+
+$gameTroop.lowestLevel()
+- This will return the lowest level of the enemy party.
+
+$gameTroop.averageLevel()
+- This will return the lowest level of the enemy party.
+
+$gameTroop.highestLevel()
+- This will return the lowest level of the enemy party.
+
+============================================================================
+Plugin Commands
+============================================================================
+
+If you wish to change enemy levels through plugin commands, you can use the
+following plugin commands to alter them. These plugin commands are only used
+inside battle.
+
+Plugin Command:
+
+  EnemyLevelChange 2 to 50
+  - This will reset the enemy in position 2's level to 50.
+
+  EnemyLevelChangeAll 50
+  - This will change the levels of all enemies to 50.
+
+  EnemyGainLevel 3 by 20
+  - This will cause the enemy in positon 3 to gain 20 levels.
+
+  EnemyGainLevelAll 20
+  - This will cause all enemies to gain 20 levels.
+
+  EnemyLoseLevel 4 by 10
+  - This will cause the enemy in positon 4 to lose 10 levels.
+
+  EnemyLoseLevelAll 10
+  - This will cause all enemies to lose 10 levels.
+
+  EnemyLevelReset 5
+  - This will reset the enemy in position 5's level to the level it had at
+  the start of battle.
+
+  EnemyLevelResetAll
+  - This will reset all enemy levels to their original levels.
+  -----------------------------------------------------------------------------
+  Custom Level 1 parameter difficulty setup
+  Stat totals  ||  Rank  ||  HP range
+  100          ||  E     ||  1000-2000
+  200          ||  D     ||  2000-3000
+  300          ||  C     ||  3000-4000
+  400          ||  B     ||  4000-5000
+  500          ||  A     ||  5000-7000
+  600-1000     ||  S     ||  7000-10000+
+  ------------------------------------------  (defunct idea)
+===============================================================================
+===============================================================================
+
+  Next attempt to balance:
+  Use the Class Parameter Curves as a reference:
+Level 1 base parameter average
+ Rank | MaxHP | MaxMP | ATK | DEF | MAT | MAT | MDF | AGI | LUK |
+ -----|-------|-------|-----|-----|-----|-----|-----|-----|-----|---
+ A    | 650   | 120   | 20  | 20  | 20  | 20  | 20  | 20  | 20  |
+ B    | 550   | 110   | 19  | 19  | 19  | 19  | 19  | 19  | 19  |
+ C    | 450   | 90    | 16  | 16  | 16  | 16  | 16  | 16  | 16  |
+ D    | 350   | 70    | 14  | 14  | 14  | 14  | 14  | 14  | 14  |
+ E    | 250   | 50    | 12  | 12  | 12  | 12  | 12  | 12  | 12  |
+
+Level 2 base parameter average (Used to find growth rate)
+ Rank | MaxHP | MaxMP | ATK | DEF | MAT | MAT | MDF | AGI | LUK |
+ A    | 750   | 140   | 23  | 23  | 23  | 23  | 23  | 23  | 23  |
+ B    | 640   | 125   | 20  | 20  | 20  | 20  | 20  | 20  | 20  |
+ C    | 530   | 100   | 18  | 18  | 18  | 18  | 18  | 18  | 18  |
+ D    | 400   | 75    | 16  | 16  | 16  | 16  | 16  | 16  | 16  |
+ E    | 300   | 55    | 13  | 13  | 13  | 13  | 13  | 13  | 13  |
+
+Level 10 base parameter average (Used to find growth rate)
+ Rank | MaxHP | MaxMP | ATK | DEF | MAT | MAT | MDF | AGI | LUK |
+ A    | 1350  | 280   | 40  | 40  | 40  | 40  | 40  | 40  | 40  |
+ B    | 1200  | 240   | 35  | 35  | 35  | 35  | 35  | 35  | 35  |
+ C    | 1000  | 200   | 30  | 30  | 30  | 30  | 30  | 30  | 30  |
+ D    | 850   | 160   | 25  | 25  | 25  | 25  | 25  | 25  | 25  |
+ E    | 650   | 120   | 21  | 21  | 21  | 21  | 21  | 21  | 21  |
+
+Level 50 base parameter average (Used to find growth rate)
+ Rank | MaxHP | MaxMP | ATK | DEF | MAT | MAT | MDF | AGI | LUK |
+A     | 4600  | 900   | 115 | 115 | 115 | 115 | 115 | 115 | 115 |
+B     | 4000  | 775   | 105 | 105 | 105 | 105 | 105 | 105 | 105 |
+C     | 3400  | 700   |  90 |  90 |  90 |  90 |  90 |  90 |  90 |
+D     | 2900  | 600   |  75 |  75 |  75 |  75 |  75 |  75 |  75 |
+E     | 2300  | 475   |  60 |  60 |  60 |  60 |  60 |  60 |  60 |
+
+Level 99 base parameter average (Used to find growth rate)
+ Rank | MaxHP | MaxMP | ATK | DEF | MAT | MAT | MDF | AGI | LUK |
+A     | 8400  | 1700  | 210 | 210 | 210 | 210 | 210 | 210 | 210 |
+B     | 7400  | 1500  | 180 | 180 | 180 | 180 | 180 | 180 | 180 |
+C     | 6400  | 1300  | 160 | 160 | 160 | 160 | 160 | 160 | 160 |
+D     | 5400  | 1100  | 140 | 140 | 140 | 140 | 140 | 140 | 140 |
+E     | 4400  |  900  | 110 | 110 | 110 | 110 | 110 | 110 | 110 |
+
+-------------------------------------------------------------------------------
+The idea here is to design the level 1 base parameters of an enemy the same way
+you would design a class in the game and edit the parameters of the
+YEP_EnemyLevels plugin to match the growth rate.

@@ -1,0 +1,125 @@
+﻿TimetrollerGames presenta
+Una producción de The TimetrollerGames Studio
+
+						Productor
+Alejandro Sequera Soltero
+
+						Jefe de proyecto
+Alejandro Sequera Soltero
+
+						Director de programación
+Adrià Cano Quintana
+
+						Diseño de motor gráfico
+Kadokawa Studio
+Adrià Cano Quintana
+						Programación del motor de juego
+Kadokawa Studio
+Adrià Cano Quintana
+						Programación de controles gráficos
+Alejandro Sequera Soltero
+Adrià Cano Quintana
+						Investigación de recursos
+Ivan Cavedo ?
+
+Director gráfico
+Ivan Cavedo ?
+
+Gráficos de juego
+Ivan Cavedo ?
+
+Diseño de logros
+Alex Salido Comino
+Ivan Spizzurri
+
+Animación
+Antoine Ramírez
+
+Sprites 2D
+RPGMV MTP
+Adrià Cano Quintana
+
+Diseño de introducción inicial
+Alejandro Sequera Soltero
+
+Diseño de mapas de juego
+Alejandro Sequera Soltero
+Adrià Cano Quintana
+
+Diseño de mapas adicionales
+Izan Sequera Soltero
+
+Herramienta para creacion de mapas y Scripts
+RPG GAME MAKER MV
+
+Sketching interfaces de juego
+Alejandro Sequera Soltero
+Adrià Cano Quintana
+Ivan Cavedo ?
+
+Material multimedia de juego
+RPGMV RTP
+Manuel Sequera Brocal
+
+Director de testing
+David Ruiz ?
+
+Depuración
+Adrià Cano Quintana
+Alejandro Sequera Soltero
+
+Efectos de sonido
+Antoine ?
+Alejandro Sequera Soltero
+
+Banda sonora original
+
+-Ambientación moderna (Kevin McLeod)
+-Ambientación moderna (Eric Matyas)
+-Ambientación medieval (Kevin McLeod)
+
+-incompetech.com
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
+Doblaje
+Antoine Ramírez
+
+Encuestas y análisis de mercado
+???
+
+Grabación del Making-of
+???
+
+Edición de trailer de juego
+???
+
+Compilación de disco, mastering y protección anticopia
+Alejandro Sequera Soltero
+
+Pruebas pre-beta y Betatesters externos
+Alejandro Sequera Soltero
+Adrià Cano Quintana
+David Ruíz ?
+Antoine Ramírez
+
+>Agradecimientos especiales
+-Por pasarnos ese contacto que tanta falta nos hacía y por llevar nuestro proyecto hasta su fin.
+
+>Dedicatoria ...
+-A todos vosotros
+Este juego ha sido desarrollado empleando un gran esfuerzo y dedicación a lo largo de sus casi ??? de desarrollo.
+Durante este tiempo, los desarrolladores nos hemos enfrentado a una verdadera batalla para realizarlo:
+Acabar una versión agradable y emocionante para todos nuestros fieles usuarios a pesar del escaso tiempo.
+Por culpa de la escuela.Gracias a nuestros compañeros, amigos y familias por tener
+que aguantar nuestras jornadas maratonianas y
+por sus contínuas muestras de apoyo.
+
+¡Os lo merecéis todo!
+
+-Copyright(C) >TimetrollerGames Studio, 2016
+-Todos los derechos resevados.
+
+>Motor de juego: ´RPGGAMEMAKER MV´
+>Copyright(C) TimetrollerGames Entertainment, 2016
+-Todos los derechos reservados.

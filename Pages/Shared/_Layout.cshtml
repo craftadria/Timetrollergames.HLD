@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />      
+    <meta name="apple-mobile-web-app-capable" content="yes">              
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+     <link rel="apple-touch-icon" href="icon/icon.png">
+    <title>@ViewData["Title"] - Hacia lo desconocido</title>    
+    <link rel="stylesheet" href="~/fonts/gamefont.css" />
+</head>
+<body>
+   
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div> 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
